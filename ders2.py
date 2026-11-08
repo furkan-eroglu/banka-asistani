@@ -4,29 +4,38 @@ class BankaHesabi:
         self.bakiye = bakiye
 
     def para_yatir(self, tutar: float) -> None:
+        if tutar <= 0:
+            raise ValueError("Yatırılacak tutar pozitif olmalı!")
         self.bakiye += tutar
 
     def bilgi(self) -> str:
         return f"{self.sahip}: {self.bakiye} TL"
 
-    def para_cek(self, tutar: float) -> bool:
+    def para_cek(self, tutar: float) -> None:
+        if tutar <= 0:
+            raise ValueError("Çekilecek tutar pozitif olmalı!")
         if tutar > self.bakiye:
-            print("Yetersiz bakiye!")
-            return False
-        else:
-            self.bakiye -= tutar
-            return True
+            raise ValueError("Yetersiz bakiye!")
+        self.bakiye -= tutar
 
 
 hesap = BankaHesabi("Ayşe Yılmaz", 1000)
 hesap.para_yatir(500)
 print(hesap.bilgi())
-if hesap.para_cek(2000):
+try:
+    hesap.para_cek(-100)
     print("Fişiniz yazdırılıyor")
-else:
-    print("Lütfen başka bir tutar girin")
+except ValueError as hata:
+    print(f"İşlem başarısız: {hata}")
 
-if hesap.para_cek(300):
+try:
+    hesap.para_cek(300)
     print("Fişiniz yazdırılıyor")
-else:
-    print("Lütfen başka bir tutar girin")
+except ValueError as hata:
+    print(f"İşlem başarısız: {hata}")
+
+try:
+    hesap.para_yatir(-200)
+    print("Fişiniz yazdırılıyor")
+except ValueError as hata:
+    print(f"İşlem başarısız: {hata}")
