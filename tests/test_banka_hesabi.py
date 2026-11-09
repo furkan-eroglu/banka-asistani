@@ -1,7 +1,7 @@
 import pytest
 
 
-from banka_hesabi import BankaHesabi
+from banka_asistani.banka_hesabi import BankaHesabi
 
 
 def test_para_yatir_bakiyeyi_arttirir():
