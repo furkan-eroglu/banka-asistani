@@ -4,8 +4,8 @@ baglanti = sqlite3.connect("banka.db")
 imlec = baglanti.cursor()
 
 imlec.execute("""
-    SELECT id, tur, bakiye,
-           ROW_NUMBER() OVER (ORDER BY tur) AS sira
+    SELECT id, bakiye,
+           LAG(bakiye) OVER (ORDER BY id) AS onceki_bakiye
     FROM hesaplar
 """)
 for satir in imlec.fetchall():
