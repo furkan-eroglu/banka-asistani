@@ -4,11 +4,14 @@ baglanti = sqlite3.connect("banka.db")
 imlec = baglanti.cursor()
 
 imlec.execute("""
-    SELECT musteriler.ad, SUM(hesaplar.bakiye)
+    WITH musteri_toplamlari AS (
+        SELECT musteri_id, SUM(bakiye) AS toplam
+        FROM hesaplar
+        GROUP BY musteri_id
+    )
+    SELECT musteriler.ad, musteri_toplamlari.toplam
     FROM musteriler
-    INNER JOIN hesaplar ON hesaplar.musteri_id = musteriler.id
-    WHERE hesaplar.tur = 'vadesiz'
-    GROUP BY musteriler.ad
+    LEFT JOIN musteri_toplamlari ON musteriler.id = musteri_toplamlari.musteri_id
 """)
 for satir in imlec.fetchall():
     print(satir)
