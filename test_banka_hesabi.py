@@ -20,3 +20,8 @@ def test_para_cek_negatif_tutarda_hata_verir():
     hesap = BankaHesabi("Ayşe", 1000)
     with pytest.raises(ValueError):
         hesap.para_cek(-100)
+
+
+def test_bakiye_sorgula_bakiyeyi_dondurur():
+    hesap = BankaHesabi("Ayşe", 1000)
+    assert hesap.bakiye_sorgula() == 1000

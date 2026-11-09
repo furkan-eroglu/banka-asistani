@@ -17,3 +17,6 @@ class BankaHesabi:
         if tutar > self.bakiye:
             raise ValueError("Yetersiz bakiye!")
         self.bakiye -= tutar
+
+    def bakiye_sorgula(self) -> float:
+        return self.bakiye
