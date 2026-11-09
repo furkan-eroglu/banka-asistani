@@ -16,6 +16,7 @@ musteri = {
 
 print(musteri["urunler"][0])
 
+
 def toplam_hesapla(tutarlar: list[float]) -> float:
     toplam = 0
     for tutar in tutarlar:
@@ -24,6 +25,7 @@ def toplam_hesapla(tutarlar: list[float]) -> float:
 
 net = toplam_hesapla(islemler)
 
+
 if net > 1000:
     print(f"Net giriş yüksek: {net} TL")
 elif net > 0:
@@ -31,11 +33,13 @@ elif net > 0:
 else:
     print("Net çıkış var")
 
+
 def buyuk_islemleri_bul(tutarlar: list[float], esik_degeri: float) -> list[float]:
     buyuk_islemler = []
     for tutar in tutarlar:
         if abs(tutar) > esik_degeri:
             buyuk_islemler.append(tutar)
     return buyuk_islemler
+
 
 print(buyuk_islemleri_bul(islemler, 600))
